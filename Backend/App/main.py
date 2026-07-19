@@ -5,12 +5,15 @@ from sqlalchemy.orm import Session
 from . import models, schemas
 from .database import Base, engine, get_db
 from .seed import seed
-from .routers import advisory, rules
+from .routers import advisory, rules, health, locations, crops
 
 app = FastAPI(title="ArgiTech API")
 
 app.include_router(advisory.router)
 app.include_router(rules.router)
+app.include_router(health.router)
+app.include_router(locations.router)
+app.include_router(crops.router)
 
 
 app.add_middleware(
@@ -25,18 +28,3 @@ app.add_middleware(
 def on_startup():
     Base.metadata.create_all(bind=engine)
     seed()
-
-
-@app.get("/health")
-def health():
-    return {"status": "OK"}
-
-
-@app.get("/locations", response_model=list[schemas.LocationOut])
-def get_locations(db: Session = Depends(get_db)):
-    return db.query(models.Location).all()
-
-
-@app.get("/crops", response_model=list[schemas.CropOut])
-def get_crops(db: Session = Depends(get_db)):
-    return db.query(models.Crop).all()

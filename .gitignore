@@ -1,0 +1,25 @@
+# Version Control Ignores
+
+# Python dependencies & virtual environments
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.db
+.env
+.env.*
+
+# Node dependencies & production builds
+node_modules/
+dist/
+
+# OS/IDE configs
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp

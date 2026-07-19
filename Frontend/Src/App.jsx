@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react'
 import { api } from './api'
 import AdvisoryForm from './components/AdvisoryForm'
 import AdvisoryResult from './components/AdvisoryResult'
+import Layout from './components/Layout'
+import HealthCheck from './components/HealthCheck'
+import LocationList from './components/LocationList'
+import CropList from './components/CropList'
 
 export default function App() {
   const [health, setHealth] = useState(null)
@@ -25,17 +29,7 @@ export default function App() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col items-center py-10 px-4">
-      {/* Title */}
-      <div className="text-center max-w-2xl mb-8">
-        <h1 className="text-3xl font-extrabold text-slate-800 tracking-tight sm:text-4xl">
-          ArgiTech
-        </h1>
-        <p className="text-slate-500 mt-2 font-medium">
-          Precision Crop Advisory & Post-Harvest Decision Engine
-        </p>
-      </div>
-
+    <Layout>
       {error && (
         <div className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-xl text-sm font-medium max-w-2xl w-full mb-6">
           Could not reach backend: {error}
@@ -60,42 +54,12 @@ export default function App() {
           </div>
 
           {/* Health check card */}
-          <div className="bg-white shadow border border-slate-100 rounded-2xl px-6 py-4 text-center mb-8 w-64">
-            <p className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Backend health check</p>
-            <p className="text-xl font-bold text-emerald-600 mt-1 flex items-center justify-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping inline-block" />
-              {health ? health.status : 'checking...'}
-            </p>
-          </div>
+          <HealthCheck health={health} />
 
           {/* Locations and Crops Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
-            <div className="bg-white shadow border border-slate-100 rounded-2xl p-5 hover:shadow-md transition">
-              <h2 className="font-bold text-slate-700 mb-3 flex items-center gap-1.5 text-base">
-                📍 Deployed Locations ({locations.length})
-              </h2>
-              <ul className="text-slate-600 text-sm space-y-2">
-                {locations.map((l) => (
-                  <li key={l.id} className="flex justify-between py-1 border-b border-slate-100 last:border-b-0">
-                    <span className="font-medium text-slate-800">{l.name}</span>
-                    <span className="text-xs text-slate-400">{l.latitude.toFixed(2)}°, {l.longitude.toFixed(2)}°</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="bg-white shadow border border-slate-100 rounded-2xl p-5 hover:shadow-md transition">
-              <h2 className="font-bold text-slate-700 mb-3 flex items-center gap-1.5 text-base">
-                🌾 Configured Crops ({crops.length})
-              </h2>
-              <ul className="text-slate-600 text-sm space-y-2">
-                {crops.map((c) => (
-                  <li key={c.id} className="flex justify-between py-1 border-b border-slate-100 last:border-b-0">
-                    <span className="font-medium text-slate-800">{c.name}</span>
-                    <span className="text-xs text-slate-400">{c.typical_duration_days} days</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <LocationList locations={locations} />
+            <CropList crops={crops} />
           </div>
         </div>
       )}
@@ -121,6 +85,6 @@ export default function App() {
           onGoHome={() => setView('home')}
         />
       )}
-    </div>
+    </Layout>
   )
 }
