@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "argitech-backend"
+version = "0.1.0"
+description = "ArgiTech advisory and decision engine backend"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.6",
+    "sqlalchemy>=2.0.35",
+    "pydantic>=2.9.2"
+]
