@@ -29,7 +29,7 @@ export default function App() {
       {/* Title */}
       <div className="text-center max-w-2xl mb-8">
         <h1 className="text-3xl font-extrabold text-slate-800 tracking-tight sm:text-4xl">
-          Krishi Drishti
+          ArgiTech
         </h1>
         <p className="text-slate-500 mt-2 font-medium">
           Precision Crop Advisory & Post-Harvest Decision Engine

@@ -1,6 +1,6 @@
-# TetraTHON AgriTech — Precision Crop Advisory & Post-Harvest Planner
+`# ArgiTech — Precision Crop Advisory & Post-Harvest Planner
 
-An integrated platform for smallholder farmers: personalised crop advisories and post-harvest decision support, built for the TetraTHON 2026 pre-screening round.
+An integrated platform for smallholder farmers: personalised crop advisories and post-harvest decision support, built for the ArgiTech pre-screening round.
 
 ## Problem
 
@@ -21,6 +21,21 @@ India's 85%+ smallholder farmers lack personalised agronomic advice, and 15–20
 | Backend | Python 3.11+, FastAPI, SQLAlchemy, SQLite |
 | Charts | Recharts |
 | Hosting | Vercel (frontend), Render (backend) |
+
+## Architecture
+
+```mermaid
+flowchart LR
+    A[Frontend<br/>React + Tailwind] --> B[FastAPI Backend]
+    B --> C[(SQLite)]
+    B --> D[Rule Engine<br/>JSON Tables]
+    B --> E[Weather Adapter<br/>Mocked JSON]
+    B --> F[Mandi Price Adapter<br/>Synthetic CSV]
+    B --> G[Spoilage Model]
+    B --> H[Transport Cost Model]
+    A -.-> I[Vercel Deploy]
+    B -.-> J[Render Deploy]
+```
 
 ## Project Structure
 
@@ -61,7 +76,7 @@ npm run dev
 - **Om B Patel** — `ombpatel`
 - **Dhruvin Patel** — `Dhruvinpatel06`
 
-Built for **TetraTHON 2026** — AgriTech Track, Navrachana University.
+Built for **ArgiTech** — AgriTech Track, Navrachana University.
 
 ## License
 
