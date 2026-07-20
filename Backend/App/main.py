@@ -16,12 +16,12 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="ArgiTech API", lifespan=lifespan)
 
-app.include_router(advisory.router)
-app.include_router(rules.router)
-app.include_router(health.router)
-app.include_router(locations.router)
-app.include_router(crops.router)
-app.include_router(post_harvest.router)
+app.include_router(advisory.router, prefix="/api")
+app.include_router(rules.router, prefix="/api")
+app.include_router(health.router, prefix="/api")
+app.include_router(locations.router, prefix="/api")
+app.include_router(crops.router, prefix="/api")
+app.include_router(post_harvest.router, prefix="/api")
 
 app.add_middleware(
     CORSMiddleware,

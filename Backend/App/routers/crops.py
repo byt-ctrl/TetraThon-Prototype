@@ -8,6 +8,5 @@ router = APIRouter()
 
 
 @router.get("/crops", response_model=list[schemas.CropOut])
-@router.get("/api/crops", response_model=list[schemas.CropOut])
 def get_crops(db: Session = Depends(get_db)):
     return db.query(models.Crop).all()

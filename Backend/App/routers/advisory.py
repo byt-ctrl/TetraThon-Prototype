@@ -10,7 +10,6 @@ router = APIRouter()
 
 
 @router.post("/advisory", response_model=schemas.AdvisoryOutput)
-@router.post("/api/advisory", response_model=schemas.AdvisoryOutput)
 def create_advisory(payload: schemas.AdvisoryInput, db: Session = Depends(get_db)):
     # 1. Look up location and crop in DB -> 404 if not found
     location = db.query(models.Location).filter(

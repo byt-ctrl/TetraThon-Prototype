@@ -9,7 +9,6 @@ router = APIRouter()
 
 
 @router.post("/post-harvest", response_model=schemas.PostHarvestOutput)
-@router.post("/api/post-harvest", response_model=schemas.PostHarvestOutput)
 def create_post_harvest_plan(payload: schemas.PostHarvestInput, db: Session = Depends(get_db)):
     # 1. Look up location in DB -> 404 if not found
     location = db.query(models.Location).filter(

@@ -9,7 +9,6 @@ router = APIRouter()
 
 
 @router.get("/rules")
-@router.get("/api/rules")
 def get_rules(
     crop_id: int | None = None,
     crop_name: str | None = None,
