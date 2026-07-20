@@ -118,6 +118,7 @@ curl http://localhost:8000/health
 
 - **Om B Patel** — `byt-ctrl`
 - **Dhruvin Patel** — `Dhruvinpatel06`
+- **Saumya Thakur** — `SaumyaThakur1226`
 
 Built for **ArgiTech** — AgriTech Track, Navrachana University.
 
