@@ -16,7 +16,27 @@
 
 ---
 
-## Slide 2: The Problem — Key Definitions
+## Slide 2: Evaluation Framework
+
+### **How This Pitch Deck Is Structured**
+
+| Section | What Judges Will See | Slides |
+|---------|---------------------|--------|
+| **01 — Problem Understanding** | Clear articulation of the problem, its context, and the pain points it addresses | Slides 3–4 |
+| **02 — Proposed Approach** | Methodology, tech stack, workflow, and reasoning behind design decisions | Slides 5–7 |
+| **03 — Market Fit & Real-World Impact** | Who it's for, why it matters, and what makes the solution viable, scalable, and impact-driven | Slides 8–9 |
+
+**Our Submission Covers:**
+
+| Evaluation Criterion | Our Response |
+|----------------------|--------------|
+| **Understanding of the Problem** | Smallholder farmers (85% of India) lose 15–20% of produce post-harvest and 20–30% yield in-season due to lack of personalized advisory and market intelligence |
+| **Proposed Approach** | Dual-engine system — Precision Crop Advisory Engine + Post-Harvest Loss Reduction Planner — built on lightweight, scalable tech stack |
+| **Market Fit & Real-World Impact** | Solves a documented ₹92,000 crore annual problem through existing FPO/KVK distribution networks with quantifiable farmer benefits |
+
+---
+
+## Slide 3: The Problem — Key Definitions (01 — Problem Understanding)
 
 ### **Understanding the Crisis**
 
@@ -36,39 +56,28 @@ The deterioration of agricultural produce between harvest and the point of sale.
 
 ---
 
-## Slide 3: Our Solution — Precision Crop Advisory Planner
+## Slide 4: Our Solution — Precision Crop Advisory Planner (02 — Proposed Approach)
 
 ### **An Integrated Dual-Engine Decision Support System**
 
-```
-                     ┌────────────────────────────────┐
-                     │     AgriTech Intelligence      │
-                     └───────────────┬────────────────┘
-                                     │
-         ┌───────────────────────────┴───────────────────────────┐
-         ▼                                                       ▼
-┌─────────────────────────────────┐             ┌─────────────────────────────────┐
-│   Module A: Precision Crop     │             │   Module B: Post-Harvest       │
-│   Advisory Engine              │             │   Loss Reduction Planner       │
-│   - Growth Stage Analysis      │             │   - Spoilage Decay Curves      │
-│   - Weather-Aware Rules        │             │   - Transport Cost Modeling    │
-│   - Ranked Actionable Advice   │             │   - Market Price Intelligence  │
-└─────────────────────────────────┘             └─────────────────────────────────┘
-```
+| Component | What It Does | Farmer Input | System Output |
+|-----------|--------------|--------------|---------------|
+| **Module A: Precision Crop Advisory Engine** | Generates stage-specific farming advice for the next 7 days | Location, crop type, sowing date, weather observation, optional leaf photo | 3 ranked advisories (irrigation, fertiliser, pest/disease) with confidence level and plain-language rationale |
+| **Module B: Post-Harvest Loss Reduction Planner** | Recommends optimal sell/store/transport action to maximize returns | Crop type, quantity, storage condition, farmer location | Sell / Store / Transport recommendation with expected return estimate and visual charts |
 
-**Module A — Precision Crop Advisory Engine:**
-* Ingests farmer inputs: location, crop type, sowing date, weather observation, optional leaf photo
-* Generates **3 ranked advisories** for the next 7 days: irrigation scheduling, fertiliser application, pest/disease alerts
-* Each advisory includes a **confidence indicator** (High/Medium/Low) and **plain-language rationale**
+**How the Two Modules Work Together:**
 
-**Module B — Post-Harvest Loss Reduction Planner:**
-* Accepts crop type, quantity, storage condition, and farmer location
-* Recommends **Sell / Store / Transport** action using mandi price data, spoilage curves, and transport cost models
-* Visualizes 30-day value retention curves and 90-day market price trends
+| Stage | Module A (In-Season) | Module B (Post-Harvest) |
+|-------|----------------------|-------------------------|
+| **Purpose** | Help farmer grow more produce | Help farmer sell produce at best price |
+| **Timing** | During crop growth (7-day rolling window) | After harvest (30-day decision horizon) |
+| **Key Output** | "Water today, apply NPK next week, watch for pests" | "Sell now for ₹62,000 or transport to Surat for ₹63,862" |
+| **Data Used** | Weather forecast + crop growth stage rules | Mandi prices + spoilage curves + transport costs |
+| **Value to Farmer** | Prevents 20–30% yield loss | Prevents 15–20% post-harvest waste |
 
 ---
 
-## Slide 4: How It Works — User Flow
+## Slide 5: How It Works — User Flow (02 — Proposed Approach continued)
 
 ### **Simple Inputs, Powerful Outputs**
 
@@ -161,37 +170,7 @@ The deterioration of agricultural produce between harvest and the point of sale.
 
 ---
 
-## Slide 8: Scalability Roadmap
-
-### **From Prototype to National Impact**
-
-**Phase 0 — Prototype (Current):**
-* Working demo with mocked weather and price data
-* Rule-based advisory and decision engine
-* English UI, deployed and live for evaluation
-
-**Phase 1 — Hackathon MVP (Week 2):**
-* Live OpenWeatherMap & Agmarknet API integration
-* Leaf-disease photo classifier using lightweight AI
-* SMS/WhatsApp price threshold alerts
-* **Hindi & Gujarati language toggle** for advisory output
-
-**Phase 2 — Pilot Rollout (Month 1–3):**
-* WhatsApp Bot integration for low-literacy farmers
-* Multi-tenant FPO agent portals
-* **Full regional language support** — Hindi, Gujarati, Marathi, Telugu, Tamil
-* Real farmer feedback loop with thumbs-up/down on advisories
-
-**Phase 3 — Enterprise Scale (Month 3–12):**
-* Cloud microservices architecture
-* Mobile app for offline-first access (React Native)
-* **Voice/IVR channel** for farmers without smartphones
-* Multi-partner FPO/KVK onboarding
-* **10+ regional languages** with community-driven translations
-
----
-
-## Slide 9: Market Fit & Viability
+## Slide 8: Market Fit & Viability
 
 ### **Built for India's 150M+ Smallholder Farmers**
 
@@ -207,14 +186,23 @@ The deterioration of agricultural produce between harvest and the point of sale.
 * **Proven need:** 15–20% post-harvest loss is a documented, quantifiable problem
 
 **Scalability:**
+
+| Stage | Capabilities |
+|-------|--------------|
+| **Prototype (Current)** | Working demo with mocked weather and price data, rule-based advisory engine, English UI |
+| **MVP Enhancement** | Live OpenWeatherMap & Agmarknet API integration, leaf-disease photo classifier, SMS/WhatsApp price alerts, **Hindi & Gujarati language toggle** |
+| **Pilot Rollout** | WhatsApp Bot for low-literacy farmers, multi-tenant FPO agent portals, **full regional language support** (Hindi, Gujarati, Marathi, Telugu, Tamil), farmer feedback loop |
+| **Enterprise Scale** | Cloud microservices, mobile app with offline-first access, **Voice/IVR channel** for non-smartphone users, multi-partner FPO/KVK onboarding, **10+ regional languages** |
+
+**Why This Scales:**
 * Modular architecture — swap mock data for live APIs without rebuilding
 * **Language-first design** — externalized strings for easy translation to any Indian language
 * FPO/KVK distribution channel reaches millions of farmers
-* Phase 3 multi-partner support enables rapid expansion
+* Multi-partner onboarding enables rapid expansion across states
 
 ---
 
-## Slide 10: Call to Action
+## Slide 9: Call to Action
 
 ### **Join Us in Empowering India's Farmers**
 
