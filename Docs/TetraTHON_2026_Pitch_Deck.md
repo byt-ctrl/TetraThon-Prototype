@@ -12,7 +12,7 @@
 * **Event:** TetraTHON 2026 Hackathon
 * **Track:** Precision Agriculture & AgriTech Innovation
 * **Phase:** Phase 0 Pre-Screening Prototype Submission
-* **Team:** Om B Patel, Mithil Desai, Dhruvin Patel, Saumya
+* **Team:** Om B Patel (Fullstack & Deployment), Mithil (Integration & Frontend), Dhruvin (Data & Engine Architecture), Saumya (Backend & APIs)
 
 ---
 
@@ -41,7 +41,7 @@
          ┌───────────────────────────┴───────────────────────────┐
          ▼                                                       ▼
 ┌─────────────────────────────────┐             ┌─────────────────────────────────┐
-│     Module A: Crop Advisory     │             │    Module B: Post-Harvest     │
+│     Module A: Crop Advisory     │             │    Module B: Post-Harvest       │
 │  - Crop Stage Identification    │             │  - 30-Day Spoilage Decay Curves │
 │  - Weather-Aware Rule Engine    │             │  - Haversine Distance Transport │
 │  - Ranked Irrigation/NPK/Pest   │             │  - APMC Mandi Price Decision    │
