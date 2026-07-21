@@ -147,7 +147,7 @@ Built for **TetraTHON 2026** — Precision AgriTech Track.
 * **Om B Patel** ([@byt-ctrl](https://github.com/byt-ctrl))
 * **Mithil Desai** ([@mithildesai24](https://github.com/PixelPirate-24))
 * **Dhruvin Patel** ([@Dhruvinpatel06](https://github.com/Dhruvinpatel06))
-* **Saumya** ([@SaumyaThakur1226](https://github.com/SaumyaThakur1226))
+* **Saumya Thakur** ([@SaumyaThakur1226](https://github.com/SaumyaThakur1226))
 
 ---
 
