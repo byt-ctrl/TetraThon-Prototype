@@ -1,7 +1,7 @@
 import json
 import datetime
 from pathlib import Path
-from App.adapters.weather import get_forecast
+from ..adapters.weather import get_forecast
 
 # Paths
 BASE_DIR = Path(__file__).resolve().parent.parent.parent

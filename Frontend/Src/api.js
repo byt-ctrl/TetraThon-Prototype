@@ -20,10 +20,10 @@ async function post(path, body) {
 }
 
 export const api = {
-  health: () => get('/health'),
-  locations: () => get('/locations'),
-  crops: () => get('/crops'),
-  postAdvisory: (data) => post('/advisory', data),
+  health: () => get('/api/health'),
+  locations: () => get('/api/locations'),
+  crops: () => get('/api/crops'),
+  postAdvisory: (data) => post('/api/advisory', data),
   getRules: (cropName) => get(`/api/rules?crop_name=${encodeURIComponent(cropName)}`),
-  postPostHarvest: (data) => post('/post-harvest', data),
+  postPostHarvest: (data) => post('/api/post-harvest', data),
 }
