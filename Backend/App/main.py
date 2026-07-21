@@ -6,6 +6,7 @@ from .database import Base, engine
 from .seed import seed
 from .routers import advisory, rules, health, locations, crops, post_harvest
 
+app = FastAPI(title="AgriTech API")
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
