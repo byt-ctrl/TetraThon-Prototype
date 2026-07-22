@@ -1,4 +1,9 @@
 import datetime
+import logging
+import httpx
+from .config import OPENWEATHER_API_KEY, OPENWEATHER_BASE_URL, OPENWEATHER_TIMEOUT
+
+logger = logging.getLogger(__name__)
 
 LOCATION_WEATHER = {
     "Vadodara": {
@@ -38,35 +43,108 @@ LOCATION_WEATHER = {
     }
 }
 
+LOCATION_COORDS = {
+    "Ahmedabad": {"lat": 23.0225, "lon": 72.5714},
+    "Vadodara": {"lat": 22.3072, "lon": 73.1812},
+    "Surat": {"lat": 21.1702, "lon": 72.8311},
+    "Rajkot": {"lat": 22.3039, "lon": 70.8022},
+    "Anand": {"lat": 22.5645, "lon": 72.9289},
+}
+
+
+def _fetch_live_forecast(location: str) -> dict | None:
+    """Attempt to fetch 7-day forecast from OpenWeatherMap. Returns None on failure."""
+    if not OPENWEATHER_API_KEY:
+        logger.warning(f"Weather: No OPENWEATHER_API_KEY set, skipping live fetch for {location}")
+        return None
+    
+    coords = LOCATION_COORDS.get(location)
+    if not coords:
+        logger.warning(f"Weather: No coordinates for {location}, skipping live fetch")
+        return None
+    
+    try:
+        with httpx.Client(timeout=OPENWEATHER_TIMEOUT) as client:
+            resp = client.get(OPENWEATHER_BASE_URL, params={
+                "lat": coords["lat"],
+                "lon": coords["lon"],
+                "appid": OPENWEATHER_API_KEY,
+                "units": "metric"
+            })
+            resp.raise_for_status()
+            data = resp.json()
+            
+            forecast = _parse_owm_forecast(data)
+            if forecast:
+                return {"location": location, "forecast": forecast, "source": "live"}
+    except Exception as exc:
+        logger.warning(f"Weather API call failed for {location}: {exc}. Falling back to mock data.")
+        return None
+    return None
+
+
+def _parse_owm_forecast(data: dict) -> list[dict]:
+    """Convert OpenWeatherMap 3-hour forecast blocks into daily summaries."""
+    daily = {}
+    for item in data.get("list", []):
+        date = item["dt_txt"].split(" ")[0]
+        if date not in daily:
+            daily[date] = {
+                "temps": [], "humidity": [], "wind": [], "rain": []
+            }
+        daily[date]["temps"].append(item["main"]["temp"])
+        daily[date]["humidity"].append(item["main"]["humidity"])
+        daily[date]["wind"].append(item["wind"]["speed"] * 3.6)  # m/s to kph
+        pop = item.get("pop", 0) * 100
+        daily[date]["rain"].append(pop)
+    
+    forecast = []
+    for i, (date, vals) in enumerate(sorted(daily.items())[:7], 1):
+        forecast.append({
+            "day": i,
+            "date": date,
+            "temp_high": round(max(vals["temps"])),
+            "temp_low": round(min(vals["temps"])),
+            "rain_chance": round(sum(vals["rain"]) / len(vals["rain"])),
+            "humidity": round(sum(vals["humidity"]) / len(vals["humidity"])),
+            "wind_kph": round(sum(vals["wind"]) / len(vals["wind"]))
+        })
+    return forecast
+
 
 def get_forecast(location: str) -> dict:
     """
-    Returns a deterministic 7-day weather forecast for a given location.
-    Raises ValueError if the location is unknown.
+    Returns 7-day weather forecast. Attempts live API first, falls back to mock.
     """
     if not location:
         raise ValueError("Location name cannot be empty")
-
-    # Case-insensitive search
+    
     matched_location = next(
         (loc for loc in LOCATION_WEATHER if loc.lower() == location.strip().lower()),
         None
     )
-
     if not matched_location:
         raise ValueError(f"Unknown location: {location}")
+    
+    # Attempt live API
+    live_result = _fetch_live_forecast(matched_location)
+    if live_result:
+        logger.info(f"Weather: live data used for {matched_location}")
+        return live_result
+    
+    # Fallback to deterministic mock
+    logger.info(f"Weather: fallback to mock for {matched_location}")
+    return _get_mock_forecast(matched_location)
 
-    config = LOCATION_WEATHER[matched_location]
+
+def _get_mock_forecast(location: str) -> dict:
+    """Original deterministic mock forecast (unchanged from Phase 0)."""
+    config = LOCATION_WEATHER[location]
     forecast = []
     base_date = datetime.date.today()
-
     for i in range(1, 8):
-        # Generate date starting from tomorrow (base_date + i days)
         forecast_date = base_date + datetime.timedelta(days=i)
-        
-        # Small deterministic adjustments per day for realism (wave pattern)
-        day_offset = (i - 1) % 3 - 1  # -1, 0, 1
-        
+        day_offset = (i - 1) % 3 - 1
         forecast.append({
             "day": i,
             "date": forecast_date.isoformat(),
@@ -76,8 +154,4 @@ def get_forecast(location: str) -> dict:
             "humidity": min(100, max(0, config["humidity"] + day_offset * 3)),
             "wind_kph": max(0, config["wind_kph"] + day_offset)
         })
-
-    return {
-        "location": matched_location,
-        "forecast": forecast
-    }
+    return {"location": location, "forecast": forecast, "source": "mock"}
