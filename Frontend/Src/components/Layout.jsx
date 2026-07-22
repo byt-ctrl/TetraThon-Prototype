@@ -1,4 +1,5 @@
 import React from 'react'
+import DataStatusIndicator from './DataStatusIndicator'
 
 export default function Layout({ children, currentView = 'home', onNavigate }) {
   const navItems = [
@@ -25,7 +26,7 @@ export default function Layout({ children, currentView = 'home', onNavigate }) {
               <h1 className="text-lg font-extrabold tracking-tight text-white flex items-center gap-2">
                 AgriTech
                 <span className="text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1.5 py-0.5 rounded uppercase tracking-wider font-semibold">
-                  v1.0 Phase 0
+                  v1.0 Phase 1
                 </span>
               </h1>
               <p className="text-[11px] text-slate-400 font-medium">
@@ -64,9 +65,11 @@ export default function Layout({ children, currentView = 'home', onNavigate }) {
       </main>
 
       {/* Footer */}
-      <footer className="mt-16 text-center text-slate-400 text-xs font-semibold uppercase tracking-wider">
-        Built for **TetraTHON 2026** — Precision AgriTech Track.
+      <footer className="mt-16 flex flex-col items-center gap-3 text-center text-slate-400 text-xs font-semibold uppercase tracking-wider">
+        <DataStatusIndicator />
+        <div>Built for <strong>TetraTHON 2026</strong> — Precision AgriTech Track.</div>
       </footer>
     </div>
   )
 }
+
