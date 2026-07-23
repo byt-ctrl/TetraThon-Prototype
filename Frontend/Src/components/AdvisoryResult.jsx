@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import LeafResult from './LeafResult'
 
 export default function AdvisoryResult({ result, inputs, onNewAdvisory, onGoHome }) {
   const [expandedCard, setExpandedCard] = useState(null) // 'irrigation', 'fertiliser', 'pest', or null
@@ -7,7 +8,7 @@ export default function AdvisoryResult({ result, inputs, onNewAdvisory, onGoHome
     setExpandedCard(expandedCard === type ? null : type)
   }
 
-  const { locationName, cropName, sowingDate, weatherObservation } = inputs
+  const { locationName, cropName, sowingDate, weatherObservation, leafResult } = inputs
   const { advisories, session_id } = result
 
   // Weather observation display names
@@ -77,6 +78,9 @@ export default function AdvisoryResult({ result, inputs, onNewAdvisory, onGoHome
 
       {/* Advisories List */}
       <div className="p-6 space-y-4">
+        {/* Leaf Result Card (if uploaded) */}
+        {leafResult && <LeafResult result={leafResult} />}
+
         {advisories.map((advisory) => {
           const isExpanded = expandedCard === advisory.type
           const details = advisory.details

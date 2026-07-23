@@ -155,10 +155,10 @@ export default function AdvisoryForm({ locations, crops, onSubmitSuccess, onCanc
           </select>
         </div>
 
-        {/* Photo Upload (Enabled & Wired) */}
+        {/* Photo Upload */}
         <div className="flex flex-col border border-dashed border-emerald-200 rounded-xl p-4 bg-emerald-50/70">
           <label className="text-sm font-semibold text-slate-700 mb-1.5 flex items-center gap-1.5">
-            📷 Upload Leaf Image <span className="text-xs bg-emerald-200 text-emerald-800 px-1.5 py-0.5 rounded font-normal uppercase tracking-wider">AI-Enhanced</span>
+            Upload Leaf Image <span className="text-xs bg-emerald-200 text-emerald-800 px-1.5 py-0.5 rounded font-normal uppercase tracking-wider">AI-Enhanced</span>
           </label>
           <input
             type="file"
@@ -185,16 +185,16 @@ export default function AdvisoryForm({ locations, crops, onSubmitSuccess, onCanc
                 </span>
               </p>
               {leafResult.is_healthy ? (
-                <p className="text-[11px] text-green-700 font-medium mt-0.5">✅ Healthy crop — no disease symptoms detected</p>
+                <p className="text-[11px] text-green-700 font-medium mt-0.5">Healthy crop - no disease symptoms detected</p>
               ) : (
-                <p className="text-[11px] text-amber-700 font-medium mt-0.5">⚠️ Disease symptoms detected — consult local officer</p>
+                <p className="text-[11px] text-amber-700 font-medium mt-0.5">Disease symptoms detected - consult local officer</p>
               )}
             </div>
           )}
           {leafResult?.error && (
             <p className="text-xs text-red-600 mt-2 font-medium">Classification failed: {leafResult.error}</p>
           )}
-          <p className="text-xs text-slate-400 mt-1.5">AI-assisted analysis — not a certified diagnosis.</p>
+          <p className="text-xs text-slate-400 mt-1.5">AI-assisted analysis - not a certified diagnosis.</p>
         </div>
 
         {/* Action Buttons */}

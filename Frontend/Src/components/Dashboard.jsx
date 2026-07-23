@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import SpoilageChart from './SpoilageChart'
 import PriceTrendChart from './PriceTrendChart'
+import LeafResult from './LeafResult'
 
 export default function Dashboard({ inputs, advisoryResult, postHarvestResult, onEditScenario, onGoHome }) {
   const [expandedAdvisory, setExpandedAdvisory] = useState(null)
   const [expandedOption, setExpandedOption] = useState(null)
 
-  const { locationName, cropName, sowingDate, weatherObservation, quantityQuintals, storageCondition } = inputs
+  const { locationName, cropName, sowingDate, weatherObservation, quantityQuintals, storageCondition, leafResult } = inputs
   const { advisories, session_id: advSessionId } = advisoryResult
   const { recommendation, option_label, expected_return, expected_return_per_quintal, details, reason, session_id: phSessionId } = postHarvestResult
 
@@ -109,6 +110,13 @@ export default function Dashboard({ inputs, advisoryResult, postHarvestResult, o
           </button>
         </div>
       </div>
+
+      {/* Leaf Analysis Result (Full Width Banner if present) */}
+      {leafResult && (
+        <div className="w-full">
+          <LeafResult result={leafResult} />
+        </div>
+      )}
 
       {/* 2-Column Side-by-Side Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
