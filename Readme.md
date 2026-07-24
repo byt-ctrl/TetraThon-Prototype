@@ -167,15 +167,55 @@ npm run dev
 
 ### 1. Generating Crop Advisories (Module A)
 1. Open `http://localhost:5173` in your browser.
-2. Select **Get Crop Advisory**.
+2. Click **Crop Advisory** from the home page.
 3. Pick your **Location** (e.g. *Anand*), **Crop** (e.g. *Cotton*), **Sowing Date**, and recent **Weather Observation**.
 4. Click **Generate Advisory** to view 3 ranked advisories (Irrigation, Fertilizer, Pest Risk) complete with confidence badges and field-ready instructions.
 
 ### 2. Planning Post-Harvest Strategy (Module B)
-1. Navigate to the **Post-Harvest Loss Planner**.
-2. Enter your **Crop Quantity** (in quintals) and select your **Storage Condition** (Open Field, Warehouse, Cold Storage).
+1. Click **Post-Harvest Plan** from the home page.
+2. Enter your **Crop Quantity** (in quintals) and select your **Storage Condition** (Open Yard, Warehouse, Cold Storage).
 3. Click **Calculate Financial Plan**.
 4. Review the optimal recommendation (**Sell Now**, **Store N Days**, or **Transport to APMC Mandi**) along with expected net returns and interactive Recharts decay/price trend charts.
+
+### 3. Unified Dashboard (Module A + B Combined)
+1. Click **Open Unified Dashboard** from the home page.
+2. Fill in **Location**, **Crop**, **Sowing Date**, **Weather Observation**, **Produce Quantity**, and **Storage Condition** — or pick a **1-Click Preset** to auto-fill.
+3. Optionally upload a **Leaf Image** for AI-assisted disease classification.
+4. Click **Evaluate Unified Scenario** to view both crop advisory and post-harvest financial results side-by-side with interactive charts.
+
+---
+
+## Screenshots
+
+> All screenshots live in [`docs/screenshots/`](./docs/screenshots/). Replace placeholders with actual captures.
+
+### Home Page
+
+![Home page showing hero banner and module selection cards](./docs/screenshots/home-page.png)
+
+---
+
+### Module A — Crop Advisory
+
+| Input Form | Results |
+|:---:|:---:|
+| ![Module A input form — location, crop, sowing date, weather fields](./docs/screenshots/advisory-form.png) | ![Module A results — ranked top-3 advisories with confidence badges](./docs/screenshots/advisory-results.png) |
+
+---
+
+### Module B — Post-Harvest Planner
+
+| Input Form | Results |
+|:---:|:---:|
+| ![Module B input form — crop quantity and storage condition selection](./docs/screenshots/post-harvest-form.png) | ![Module B results — optimal Sell Now / Store / Transport recommendation with net returns](./docs/screenshots/post-harvest-results.png) |
+
+---
+
+### Unified Dashboard
+
+| Input Form | Results |
+|:---:|:---:|
+| ![Unified scenario form — all fields plus optional leaf image upload](./docs/screenshots/unified-dashboard-form.png) | ![Unified dashboard — side-by-side advisory + post-harvest panels with Recharts visualizations](./docs/screenshots/unified-dashboard.png) |
 
 ---
 
